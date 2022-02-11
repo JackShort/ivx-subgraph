@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: IVxFactory
@@ -20,7 +20,7 @@ dataSources:
         - Transfer
       abis:
         - name: IVxFactory
-          file: ./abis/IVxFactory.json
+          file: IVxFactory/abis/IVxFactory.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,indexed uint256)
           handler: handleApproval
@@ -32,4 +32,4 @@ dataSources:
           handler: handleRedeemed
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: IVxFactory/IVxFactory.wasm
