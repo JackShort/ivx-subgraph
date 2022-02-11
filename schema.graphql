@@ -52,7 +52,7 @@ type Account @entity {
   tokens: [Token!]! @derivedFrom(field: "owner")
 
   "IVxID"
-  ivxId: Int
+  ivxId: BigInt
 }
 
 interface Erc721Token {

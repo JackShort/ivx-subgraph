@@ -269,13 +269,21 @@ export class Account extends Entity {
     this.set("tokens", Value.fromStringArray(value));
   }
 
-  get ivxId(): i32 {
+  get ivxId(): BigInt | null {
     let value = this.get("ivxId");
-    return value!.toI32();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
   }
 
-  set ivxId(value: i32) {
-    this.set("ivxId", Value.fromI32(value));
+  set ivxId(value: BigInt | null) {
+    if (!value) {
+      this.unset("ivxId");
+    } else {
+      this.set("ivxId", Value.fromBigInt(<BigInt>value));
+    }
   }
 }
 

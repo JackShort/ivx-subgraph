@@ -62,6 +62,32 @@ export class ApprovalForAll__Params {
   }
 }
 
+export class Mint extends ethereum.Event {
+  get params(): Mint__Params {
+    return new Mint__Params(this);
+  }
+}
+
+export class Mint__Params {
+  _event: Mint;
+
+  constructor(event: Mint) {
+    this._event = event;
+  }
+
+  get to(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get tokenId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get ivxId(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
 export class OwnershipTransferred extends ethereum.Event {
   get params(): OwnershipTransferred__Params {
     return new OwnershipTransferred__Params(this);
@@ -84,16 +110,16 @@ export class OwnershipTransferred__Params {
   }
 }
 
-export class Redeemed extends ethereum.Event {
-  get params(): Redeemed__Params {
-    return new Redeemed__Params(this);
+export class Redeem extends ethereum.Event {
+  get params(): Redeem__Params {
+    return new Redeem__Params(this);
   }
 }
 
-export class Redeemed__Params {
-  _event: Redeemed;
+export class Redeem__Params {
+  _event: Redeem;
 
-  constructor(event: Redeemed) {
+  constructor(event: Redeem) {
     this._event = event;
   }
 
