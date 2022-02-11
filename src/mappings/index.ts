@@ -36,7 +36,7 @@ export function handleMint(event: Mint): void {
   global.save()
 }
 
-export function handleRedeemed(event: Redeem): void {
+export function handleRedeem(event: Redeem): void {
   let tokenId = event.params.tokenId.toHex()
   let ownerAddress = event.params.to
   let blockNumber = event.block.number
