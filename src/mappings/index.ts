@@ -6,7 +6,7 @@ import { transfer } from './transfer'
 
 import { tokens, accounts, blocks, transactionsMeta } from '../modules'
 
-export function handleTransfer(event: Mint): void {
+export function handleMint(event: Mint): void {
   let tokenId = event.params.tokenId.toHex()
   let ivxId = event.params.ivxId
   let blockNumber = event.block.number
