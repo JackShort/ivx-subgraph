@@ -25,6 +25,7 @@ export namespace tokens {
   export function mintToken(tokenId: string, owner: string): Token {
     let token = getOrCreateToken(tokenId, owner)
     token.redeemed = false
+    token.creator = owner
     return token as Token
   }
 
