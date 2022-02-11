@@ -120,3 +120,9 @@ type Mint implements Transaction @entity {
   "Current transaction type"
   type: TranasctionType!
 }
+
+type GlobalResult @entity {
+  id: ID! # fixed to 0x0
+  totalMinted: BigInt!
+  totalRedeemed: BigInt!
+}

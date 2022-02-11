@@ -4,7 +4,9 @@ import { Redeem, Mint } from '../../generated/IVxFactory/IVxFactory'
 
 import { transfer } from './transfer'
 
-import { tokens, accounts, blocks, transactionsMeta } from '../modules'
+import { tokens, accounts, blocks, transactionsMeta, globals } from '../modules'
+
+let ONE = BigInt.fromI32(1)
 
 export function handleMint(event: Mint): void {
   let tokenId = event.params.tokenId.toHex()
@@ -28,6 +30,10 @@ export function handleMint(event: Mint): void {
   meta.save()
 
   transfer.handleMint(event.params.to, tokenId, timestamp, blockId, ivxId)
+
+  let global = globals.getGlobalEntity()
+  global.totalMinted = global.totalMinted.plus(ONE)
+  global.save()
 }
 
 export function handleRedeemed(event: Redeem): void {
@@ -56,4 +62,8 @@ export function handleRedeemed(event: Redeem): void {
 
   let token = tokens.redeemToken(tokenId, owner.id)
   token.save()
+
+  let global = globals.getGlobalEntity()
+  global.totalMinted = global.totalRedeemed.plus(ONE)
+  global.save()
 }

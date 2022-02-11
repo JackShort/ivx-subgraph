@@ -454,3 +454,57 @@ export class Mint extends Entity {
     this.set("type", Value.fromString(value));
   }
 }
+
+export class GlobalResult extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("totalMinted", Value.fromBigInt(BigInt.zero()));
+    this.set("totalRedeemed", Value.fromBigInt(BigInt.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save GlobalResult entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save GlobalResult entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("GlobalResult", id.toString(), this);
+    }
+  }
+
+  static load(id: string): GlobalResult | null {
+    return changetype<GlobalResult | null>(store.get("GlobalResult", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get totalMinted(): BigInt {
+    let value = this.get("totalMinted");
+    return value!.toBigInt();
+  }
+
+  set totalMinted(value: BigInt) {
+    this.set("totalMinted", Value.fromBigInt(value));
+  }
+
+  get totalRedeemed(): BigInt {
+    let value = this.get("totalRedeemed");
+    return value!.toBigInt();
+  }
+
+  set totalRedeemed(value: BigInt) {
+    this.set("totalRedeemed", Value.fromBigInt(value));
+  }
+}
