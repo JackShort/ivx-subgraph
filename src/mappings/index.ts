@@ -64,6 +64,6 @@ export function handleRedeem(event: Redeem): void {
   token.save()
 
   let global = globals.getGlobalEntity()
-  global.totalMinted = global.totalRedeemed.plus(ONE)
+  global.totalRedeemed = global.totalRedeemed.plus(ONE)
   global.save()
 }
