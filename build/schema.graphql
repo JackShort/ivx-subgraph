@@ -111,6 +111,9 @@ type Mint implements Transaction @entity {
   "Buyer account"
   to: Account
 
+  "IVX ID"
+  ivxId: BigInt
+
   "Token traded"
   token: Token
 
