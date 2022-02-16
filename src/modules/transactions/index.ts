@@ -13,10 +13,11 @@ export namespace transactions {
     }
   }
 
-  export function getNewMint(to: string, token: string, timestamp: BigInt, blockId: string): Mint {
+  export function getNewMint(to: string, token: string, ivxId: BigInt, timestamp: BigInt, blockId: string): Mint {
     let transaction = new Mint(helpers.getNewTransactionId(ADDRESS_ZERO, to, timestamp))
     transaction.from = ADDRESS_ZERO
     transaction.to = to
+    transaction.ivxId = ivxId
     transaction.token = token
     transaction.block = blockId
     transaction.type = constants.TRANSACTION_MINT

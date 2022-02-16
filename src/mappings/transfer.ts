@@ -10,7 +10,7 @@ export namespace transfer {
     let token = tokens.mintToken(tokenId, account.id)
     token.save()
 
-    let transaction = transactions.getNewMint(account.id, tokenId, timestamp, blockId)
+    let transaction = transactions.getNewMint(account.id, tokenId, ivxId, timestamp, blockId)
     transaction.save()
   }
 }

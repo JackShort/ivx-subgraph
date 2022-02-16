@@ -419,6 +419,23 @@ export class Mint extends Entity {
     }
   }
 
+  get ivxId(): BigInt | null {
+    let value = this.get("ivxId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set ivxId(value: BigInt | null) {
+    if (!value) {
+      this.unset("ivxId");
+    } else {
+      this.set("ivxId", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
   get token(): string | null {
     let value = this.get("token");
     if (!value || value.kind == ValueKind.NULL) {
