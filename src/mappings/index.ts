@@ -38,11 +38,13 @@ export function handleMint(event: Mint): void {
 
 export function handleRedeem(event: Redeem): void {
   let tokenId = event.params.tokenId.toHex()
-  let ownerAddress = event.params.to
   let blockNumber = event.block.number
   let blockId = blockNumber.toString()
   let txHash = event.transaction.hash
   let timestamp = event.block.timestamp
+
+  let block = blocks.getOrCreateBlock(blockId, timestamp, blockNumber)
+  block.save()
 
   let meta = transactionsMeta.getOrCreateTransactionMeta(
     txHash.toHexString(),
@@ -54,14 +56,7 @@ export function handleRedeem(event: Redeem): void {
   )
   meta.save()
 
-  let block = blocks.getOrCreateBlock(blockId, timestamp, blockNumber)
-  block.save()
-
-  let owner = accounts.getOrCreateAccount(ownerAddress)
-  owner.save()
-
-  let token = tokens.redeemToken(tokenId, owner.id)
-  token.save()
+  transfer.handleRedeem(event.params.to, tokenId, timestamp, blockId)
 
   let global = globals.getGlobalEntity()
   global.totalRedeemed = global.totalRedeemed.plus(ONE)

@@ -1,10 +1,11 @@
 import { ADDRESS_ZERO } from '@protofire/subgraph-toolkit'
 import { BigInt } from '@graphprotocol/graph-ts'
-import { Mint } from '../../../generated/schema'
+import { Mint, Redeem } from '../../../generated/schema'
 
 export namespace transactions {
   export namespace constants {
     export let TRANSACTION_MINT = 'MINT'
+    export let TRANSACTION_REDEEM = 'REDEEM'
   }
 
   export namespace helpers {
@@ -22,5 +23,14 @@ export namespace transactions {
     transaction.block = blockId
     transaction.type = constants.TRANSACTION_MINT
     return transaction as Mint
+  }
+
+  export function getNewRedeem(to: string, token: string, timestamp: BigInt, blockId: string): Redeem {
+    let transaction = new Redeem(helpers.getNewTransactionId(to, to, timestamp))
+    transaction.to = to
+    transaction.token = token
+    transaction.block = blockId
+    transaction.type = constants.TRANSACTION_REDEEM
+    return transaction as Redeem
   }
 }

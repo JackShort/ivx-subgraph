@@ -82,6 +82,7 @@ type Token implements Erc721Token @entity {
 
 enum TranasctionType {
   MINT
+  REDEEM
 }
 
 interface Transaction {
@@ -115,6 +116,26 @@ type Mint implements Transaction @entity {
   ivxId: BigInt
 
   "Token traded"
+  token: Token
+
+  "Related block"
+  block: Block!
+
+  "Current transaction type"
+  type: TranasctionType!
+}
+
+type Redeem implements Transaction @entity {
+  "Internal ID used for indexation"
+  id: ID!
+
+  "Redeemer account"
+  from: Account
+
+  "Redeemer account"
+  to: Account
+
+  "Token redeemed"
   token: Token
 
   "Related block"
