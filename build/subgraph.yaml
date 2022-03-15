@@ -4,9 +4,9 @@ schema:
 dataSources:
   - kind: ethereum
     name: IVxFactory
-    network: rinkeby
+    network: mainnet
     source:
-      address: "0xBc4f43a626E97A2755524dcc5bA0AD471ECF5FD8"
+      address: "0x2997b2e267be1B97A7525a6E9312B0C708D7F740"
       abi: IVxFactory
     mapping:
       kind: ethereum/events
